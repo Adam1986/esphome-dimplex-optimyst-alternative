@@ -1,0 +1,84 @@
+# Example ESPHome config for the Dimplex Opti-Myst Pro external component.
+#
+# Tested against CDFI500-PRO + CDFI1000-PRO (firmware H:7.0 / S:6.1).
+# See README.md for the protocol and the cassette pairing procedure.
+
+external_components:
+  - source: github://victorgolfecho/esphome-dimplex-optimyst@main
+    components: [dimplex_optimyst]
+    # For local development, point at a checkout instead:
+    #   - source:
+    #       type: local
+    #       path: components
+
+esphome:
+  name: dimplex-fireplace
+  friendly_name: "Dimplex Fireplace"
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+
+api:
+# Uncomment + set an encryption key to expose to Home Assistant.
+#  encryption:
+#    key: !secret api_key
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+web_server:
+  port: 80
+  version: 3
+
+esp32_ble:
+  io_capability: none
+
+dimplex_optimyst:
+  - id: cassette
+
+button:
+  - platform: dimplex_optimyst
+    dimplex_id: cassette
+    name: "Power"
+    cmd: POWER
+
+  - platform: dimplex_optimyst
+    dimplex_id: cassette
+    name: "Sound"
+    cmd: SOUND
+
+  - platform: dimplex_optimyst
+    dimplex_id: cassette
+    name: "Heat ON"
+    cmd: HEAT_ON
+
+  - platform: dimplex_optimyst
+    dimplex_id: cassette
+    name: "Heat OFF"
+    cmd: HEAT_OFF
+
+  - platform: dimplex_optimyst
+    dimplex_id: cassette
+    name: "Mist Up"
+    cmd: MIST_UP
+
+  - platform: dimplex_optimyst
+    dimplex_id: cassette
+    name: "Mist Down"
+    cmd: MIST_DOWN
+
+  # Press the cassette's Bluetooth-icon button, then press this within 20s.
+  # Broadcasts the Sound command for 25s, covering the sync window.
+  - platform: dimplex_optimyst
+    dimplex_id: cassette
+    name: "Sync to Cassette"
+    cmd: SOUND
+    duration: 25s

@@ -1,0 +1,10 @@
+# ESPHome build artifacts
+/.esphome/
+
+# Local secrets (Wi-Fi etc.) — copy from secrets.yaml.example
+/secrets.yaml
+
+# Editor / OS noise
+.DS_Store
+*.swp
+__pycache__/
