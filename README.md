@@ -119,6 +119,50 @@ If your cassette is a newer Flame Connect-app variant which uses BLE GATT
 [community thread on Home Assistant discussions][ha977] has notes on
 related models.
 
+## ⚠️ Important: ESP32 chip revision matters
+
+**Use an ESP32 with revision v1.0 silicon.** ESP32-D0WD revision v3.0
+(also marketed as "ESP32-ECO3") boards have a bug in this BLE
+advertisement code path: `esp_ble_gap_start_advertising` returns success
+and the chip transmits scan requests fine, but advertisement packets
+either never hit the air or transmit at near-zero power. Cassettes don't
+see them. Verified across two different V3.0 modules from the same batch;
+both fail identically while V1.0 modules nearby broadcast strongly.
+
+**How to check what you have**, plug the board into USB and run:
+
+```bash
+esptool.py --port /dev/ttyUSB0 chip_id
+```
+
+You're looking for:
+
+- ✅ `ESP32-D0WDQ6 (revision v1.0)` — works
+- ✅ `ESP32-D0WD (revision v1.0)` — works
+- ❌ `ESP32-D0WD-V3 (revision v3.0)` — does NOT reliably broadcast
+
+**Sourcing V1.0 silicon** is harder than it should be in 2026 — Espressif
+has shifted production to V3.0, and generic listings (e.g., Amazon
+"ESP-WROOM-32" / "ESP32 CH340C TYPE-C" boards) almost always ship V3.0
+now. The boards look physically identical; the difference is only on the
+silkscreen on the chip itself.
+
+To get V1.0 reliably:
+
+- Buy through **DigiKey/Mouser** with explicit part numbers
+  `ESP32-WROOM-32D` or `ESP32-D0WDQ6`.
+- Or **buy in bulk** from cheap sources and screen with `esptool.py` on
+  receipt; expect ~50% V3.0 to discard.
+
+Alternatives worth trying if you want newer silicon and can iterate:
+
+- **ESP32-S3** modules — different chip family entirely, untested with
+  this component but may sidestep the V3.0 BLE bug. Would also need
+  framework adjustments (the YAML's `board: esp32dev` would change).
+
+If your boards aren't broadcasting and `esptool` reports V3.0, the
+component code isn't the problem — it's the silicon.
+
 ## Acknowledgements
 
 The `pOptimyst` magic prefix and several command bytes were originally
