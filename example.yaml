@@ -1,10 +1,28 @@
-# Example ESPHome config for the Dimplex Opti-Myst Pro external component.
+# Example ESPHome config for the Dimplex Opti-Myst external component.
 #
-# Tested against CDFI500-PRO + CDFI1000-PRO (firmware H:7.0 / S:6.1).
-# See README.md for the protocol and the cassette pairing procedure.
+# Dimplex Penngrove/PNN20 units only pair with a single Bluetooth remote at a time.
+# However, by configuring the ESP32 to use the same base MAC address as the
+# original Dimplex controller, both the physical remote and the ESP32 can
+# control the heater simultaneously.
+#
+# The remote's Bluetooth MAC address can be discovered by scanning for its
+# advertisements using an application such as nRF Connect.
+#
+# ESPHome's `set_mac_address()` sets the ESP32's base MAC address, from which
+# the Bluetooth MAC is automatically derived.  On the ESP32 used during testing,
+# the Bluetooth interface uses a MAC address that is two higher than the base
+# address.
+#
+# Example:
+#   Physical remote Bluetooth MAC: 04:91:62:1F:22:12
+#   ESPHome base MAC to configure: 04:91:62:1F:22:10
+#
+# This results in the ESP32 Bluetooth interface advertising as
+# 04:91:62:1F:22:12, matching the original remote.
+# See README.md for the protocol and the pairing procedure.
 
 external_components:
-  - source: github://victorgolfecho/esphome-dimplex-optimyst@main
+  - source: github://Adam1986/esphome-dimplex-optimyst-alternative@main
     components: [dimplex_optimyst]
     # For local development, point at a checkout instead:
     #   - source:
@@ -14,6 +32,16 @@ external_components:
 esphome:
   name: dimplex-fireplace
   friendly_name: "Dimplex Fireplace"
+  on_boot:
+    priority: 1100
+    then:
+      - lambda: |-
+          uint8_t custom_mac[6] = {0xXX, 0xXX, 0xXX, 0xXX, 0xXX, 0xXX}; # Enter MAC Address here after each 0x section
+          
+          // Use ESPHome's helper (no manual include needed)
+          esphome::set_mac_address(custom_mac);
+          
+          ESP_LOGI("custom_mac", "✅ Set base MAC address to XX:XX:XX:XX:XX:XX"); # Enter MAC Address here for reference.
 
 esp32:
   board: esp32dev
@@ -52,18 +80,18 @@ button:
 
   - platform: dimplex_optimyst
     dimplex_id: cassette
-    name: "Sound"
-    cmd: SOUND
+    name: "Heater Fan Mode"
+    cmd: FAN_SPEED
 
   - platform: dimplex_optimyst
     dimplex_id: cassette
-    name: "Heat ON"
-    cmd: HEAT_ON
+    name: "Temperature Up"
+    cmd: TEMP_UP
 
   - platform: dimplex_optimyst
     dimplex_id: cassette
-    name: "Heat OFF"
-    cmd: HEAT_OFF
+    name: "Temperature Down"
+    cmd: TEMP_DOWN
 
   - platform: dimplex_optimyst
     dimplex_id: cassette
@@ -79,6 +107,6 @@ button:
   # Broadcasts the Sound command for 25s, covering the sync window.
   - platform: dimplex_optimyst
     dimplex_id: cassette
-    name: "Sync to Cassette"
-    cmd: SOUND
-    duration: 25s
+    name: "Pair to Opti-Myst Fire"
+    cmd: FAN_SPEED
+    duration: 8s
