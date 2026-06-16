@@ -18,7 +18,7 @@ DimplexOptimyst = dimplex_optimyst_ns.class_("DimplexOptimyst", cg.Component)
 # for all six: 4F 70 74 69 6D 79 73 74 <cmd> 05 (ASCII "Optimyst" prefix).
 DIMPLEX_COMMANDS = {
     "POWER": 0x29,
-    "FAN_SPEED": 0x28,
+    "HEATER_OFF_LOW_HIGH": 0x28,
     "TEMP_UP": 0x04,
     "HEAT_DOWN": 0x08,
     "MIST_UP": 0x55,
