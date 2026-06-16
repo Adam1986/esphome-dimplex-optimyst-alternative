@@ -36,12 +36,12 @@ esphome:
     priority: 1100
     then:
       - lambda: |-
-          uint8_t custom_mac[6] = {0xXX, 0xXX, 0xXX, 0xXX, 0xXX, 0xXX}; # Enter MAC Address here after each 0x section as per the details above.
+          uint8_t custom_mac[6] = {0xXX, 0xXX, 0xXX, 0xXX, 0xXX, 0xXX}; // Enter MAC Address here after each 0x section as per the details above.
           
           // Use ESPHome's helper (no manual include needed)
           esphome::set_mac_address(custom_mac);
           
-          ESP_LOGI("custom_mac", "✅ Set base MAC address to XX:XX:XX:XX:XX:XX"); # Enter MAC Address here for reference.
+          ESP_LOGI("custom_mac", "✅ Set base MAC address to XX:XX:XX:XX:XX:XX"); // Enter MAC Address here for reference.
 
 esp32:
   board: esp32dev
