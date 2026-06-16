@@ -15,14 +15,14 @@ dimplex_optimyst_ns = cg.esphome_ns.namespace("dimplex_optimyst")
 DimplexOptimyst = dimplex_optimyst_ns.class_("DimplexOptimyst", cg.Component)
 
 # Command bytes captured from a physical 6-button remote. Same on-air format
-# for all six: 4F 70 74 69 6D 79 73 74 <cmd> 08 (ASCII "Optimyst" prefix).
+# for all six: 4F 70 74 69 6D 79 73 74 <cmd> 05 (ASCII "Optimyst" prefix).
 DIMPLEX_COMMANDS = {
     "POWER": 0x29,
-    "SOUND": 0x28,
-    "HEAT_ON": 0xBE,
-    "HEAT_OFF": 0xEF,
-    "MIST_UP": 0xDE,
-    "MIST_DOWN": 0xAD,
+    "FAN_SPEED": 0x28,
+    "TEMP_UP": 0x04,
+    "HEAT_DOWN": 0x08,
+    "MIST_UP": 0x55,
+    "MIST_DOWN": 0x44,
 }
 
 CONFIG_SCHEMA = cv.Schema(
