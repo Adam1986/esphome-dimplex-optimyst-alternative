@@ -16,7 +16,7 @@ static const char *const TAG = "dimplex_optimyst";
 // Dimplex Opti-Myst Pro 6-button remote:
 //   Flags AD:                 02 01 04
 //   Manufacturer-data AD:     0B FF + company-id-LE 4F 70 + payload
-//   Payload:                  74 69 6D 79 73 74 <cmd> 08
+//   Payload:                  74 69 6D 79 73 74 <cmd> 05
 //                             ↑ "timyst"          ↑       ↑
 //                                                 cmd     trailer
 // Combined with the company-ID, the on-air bytes read "Optimyst<cmd>\x08".
@@ -25,7 +25,7 @@ static const uint8_t DIMPLEX_TEMPLATE[15] = {
     0x0B, 0xFF, 0x4F, 0x70,
     0x74, 0x69, 0x6D, 0x79, 0x73, 0x74,
     0x00,  // <-- command byte goes here (index 13)
-    0x08,
+    0x05,
 };
 static constexpr size_t CMD_INDEX = 13;
 static constexpr size_t TEMPLATE_LEN = sizeof(DIMPLEX_TEMPLATE);
