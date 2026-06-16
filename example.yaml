@@ -14,8 +14,8 @@
 # address.
 #
 # Example:
-#   Physical remote Bluetooth MAC: 04:91:62:1F:22:12
-#   ESPHome base MAC to configure: 04:91:62:1F:22:10
+# Physical remote Bluetooth MAC: 04:91:62:1F:22:12
+# ESPHome base MAC to configure: 04:91:62:1F:22:10
 #
 # This results in the ESP32 Bluetooth interface advertising as
 # 04:91:62:1F:22:12, matching the original remote.
@@ -36,7 +36,7 @@ esphome:
     priority: 1100
     then:
       - lambda: |-
-          uint8_t custom_mac[6] = {0xXX, 0xXX, 0xXX, 0xXX, 0xXX, 0xXX}; # Enter MAC Address here after each 0x section
+          uint8_t custom_mac[6] = {0xXX, 0xXX, 0xXX, 0xXX, 0xXX, 0xXX}; # Enter MAC Address here after each 0x section as per the details above.
           
           // Use ESPHome's helper (no manual include needed)
           esphome::set_mac_address(custom_mac);
@@ -104,10 +104,11 @@ button:
     cmd: MIST_DOWN
 
   # Power cycle the Dimplex Fireplace, then press this within 20s.
-  # Should not be required if using the same MAC Address as the physical remote however.
-  # Broadcasts the Fan Mode command for 8s, covering the pairing window.
+  # Should not be required if using the same MAC Address as the physical remote
+  # But could be useful if the original remote has been lost and this acts as a replacement.
+  # Broadcasts the Fan Mode command for 10s, covering the pairing window.
   - platform: dimplex_optimyst
     dimplex_id: cassette
     name: "Pair to Opti-Myst Fire"
     cmd: FAN_SPEED
-    duration: 8s
+    duration: 10s
