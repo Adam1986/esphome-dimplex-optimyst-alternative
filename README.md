@@ -1,13 +1,15 @@
-# esphome-dimplex-optimyst
+# esphome-dimplex-optimyst-alternative
+
+This was forked from this fantastic repository https://github.com/victorgolfecho/esphome-dimplex-optimyst to serve as an additional solution for other Dimplex Fireplace Units/Remote Controls.
+
+I updated this code to replicate another remote control supplied with Dimplex Opti-Myst Fires (Pictured).
+The remote buttons do slightly different BLE Advertisements compared to the original repo.
 
 ESPHome external component that turns an ESP32 into a virtual Dimplex
-Opti-Myst Pro remote. Bluetooth-advertises the same packets the physical
+Opti-Myst remote.  Bluetooth-advertises the same packets the physical
 6-button remote sends, so the cassette can't tell the difference.
 
-Confirmed working with the **CDFI500-PRO** and **CDFI1000-PRO** cassettes
-(Dimplex part numbers 6909660300 / 6909660400) used in the Opti-Myst Pro
-1000 / Pro 1500 / GBF fireboxes. Tested in 2026 against firmware
-H:7.0 / S:6.1.
+Confirmed working with the **Penngrove/PNN20** Inset Electric Fire.
 
 Not affiliated with Dimplex. Use at your own risk.
 
@@ -17,7 +19,7 @@ Add to any ESPHome config:
 
 ```yaml
 external_components:
-  - source: github://victorgolfecho/esphome-dimplex-optimyst@main
+  - source: github://Adam1986/esphome-dimplex-optimyst-alternative@main
     components: [dimplex_optimyst]
 
 esp32_ble:
