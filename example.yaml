@@ -41,8 +41,7 @@ esphome:
           // Use ESPHome's helper (no manual include needed)
           esphome::set_mac_address(custom_mac);
           
-          ESP_LOGI("custom_mac", "✅ Set base MAC address to XX:XX:XX:XX:XX:XX"); // Enter MAC Address here for reference.
-
+          ESP_LOGI("custom_mac", "✅ Custom MAC Address Applied");
 esp32:
   board: esp32dev
   framework:
@@ -112,3 +111,4 @@ button:
     name: "Pair to Opti-Myst Fire"
     cmd: FAN_SPEED
     duration: 10s
+    entity_category: diagnostic
