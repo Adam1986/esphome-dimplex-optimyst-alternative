@@ -70,45 +70,45 @@ esp32_ble:
   io_capability: none
 
 dimplex_optimyst:
-  - id: cassette
+  - id: inset_fire
 
 button:
   - platform: dimplex_optimyst
-    dimplex_id: cassette
+    dimplex_id: inset_fire
     name: "Power"
     cmd: POWER
 
   - platform: dimplex_optimyst
-    dimplex_id: cassette
+    dimplex_id: inset_fire
     name: "Heater Fan Mode"
     cmd: FAN_SPEED
 
   - platform: dimplex_optimyst
-    dimplex_id: cassette
+    dimplex_id: inset_fire
     name: "Temperature Up"
     cmd: TEMP_UP
 
   - platform: dimplex_optimyst
-    dimplex_id: cassette
+    dimplex_id: inset_fire
     name: "Temperature Down"
     cmd: TEMP_DOWN
 
   - platform: dimplex_optimyst
-    dimplex_id: cassette
+    dimplex_id: inset_fire
     name: "Mist Up"
     cmd: MIST_UP
 
   - platform: dimplex_optimyst
-    dimplex_id: cassette
+    dimplex_id: inset_fire
     name: "Mist Down"
     cmd: MIST_DOWN
 
-  # Power cycle the Dimplex Fireplace, then press this within 20s.
+  # Power cycle the Dimplex Fire, then press this within 20s.
   # Should not be required if using the same MAC Address as the physical remote
   # But could be useful if the original remote has been lost and this acts as a replacement.
   # Broadcasts the Fan Mode command for 10s, covering the pairing window.
   - platform: dimplex_optimyst
-    dimplex_id: cassette
+    dimplex_id: inset_fire
     name: "Pair to Opti-Myst Fire"
     cmd: FAN_SPEED
     duration: 10s
