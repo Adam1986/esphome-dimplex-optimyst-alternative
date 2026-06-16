@@ -1,7 +1,7 @@
-"""Dimplex Opti-Myst Pro external component for ESPHome.
+"""Dimplex Opti-Myst external component for ESPHome.
 
-Turns the ESP32 into a virtual 6-button remote for the Dimplex Opti-Myst Pro
-cassette family (CDFI500-PRO / CDFI1000-PRO).
+Turns the ESP32 into a virtual 6-button remote for the Dimplex Opti-Myst
+Inset Fire (Penngrove/PNN20 & models with the same remote control).
 """
 import esphome.codegen as cg
 import esphome.config_validation as cv
