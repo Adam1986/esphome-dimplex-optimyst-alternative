@@ -103,8 +103,9 @@ button:
     name: "Mist Down"
     cmd: MIST_DOWN
 
-  # Press the cassette's Bluetooth-icon button, then press this within 20s.
-  # Broadcasts the Sound command for 25s, covering the sync window.
+  # Power cycle the Dimplex Fireplace, then press this within 20s.
+  # Should not be required if using the same MAC Address as the physical remote however.
+  # Broadcasts the Fan Mode command for 8s, covering the pairing window.
   - platform: dimplex_optimyst
     dimplex_id: cassette
     name: "Pair to Opti-Myst Fire"
