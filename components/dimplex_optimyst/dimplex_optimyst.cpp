@@ -13,7 +13,7 @@ namespace dimplex_optimyst {
 static const char *const TAG = "dimplex_optimyst";
 
 // Manufacturer-specific advertising frame as captured from a physical
-// Dimplex Opti-Myst Pro 6-button remote:
+// Dimplex Opti-Myst 6-button remote:
 //   Flags AD:                 02 01 04
 //   Manufacturer-data AD:     0B FF + company-id-LE 4F 70 + payload
 //   Payload:                  74 69 6D 79 73 74 <cmd> 05
