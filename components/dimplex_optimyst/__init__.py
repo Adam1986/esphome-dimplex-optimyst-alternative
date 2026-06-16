@@ -20,7 +20,7 @@ DIMPLEX_COMMANDS = {
     "POWER": 0x29,
     "FAN_SPEED": 0x28,
     "TEMP_UP": 0x04,
-    "HEAT_DOWN": 0x08,
+    "TEMP_DOWN": 0x08,
     "MIST_UP": 0x55,
     "MIST_DOWN": 0x44,
 }
